@@ -93,12 +93,15 @@ function game() {
         let resultado = determinarQuienGana(decisionPersona, decisionMaquina);
 
         if (resultado === true) {
+            alert(`La maquina escogio ${decisionMaquina}`)
             alert(`¡Usted Gana! ${decisionPersona} le gana a ${decisionMaquina}. (Punto para el Jugador!)`)
             ++puntuacionJugador
         } else if (resultado === false) {
+            alert(`La maquina escogio ${decisionMaquina}`)
             alert(`¡Ohhh nooo! Has perdido, ${decisionPersona} pierde contra ${decisionMaquina}. (Punto para la Maquina!)`)
             ++puntuacionMaquina
         } else {
+            alert(`La maquina escogio ${decisionMaquina}`)
             alert("Es un empate! (Nadie recibe puntos!)")
         }
 
@@ -112,6 +115,8 @@ function game() {
     } else {
         alert("¿Es un empate?")
     }
+
+    confirm("Desea jugar nuevamente?") ? location.reload() : alert(":(");
 }
 
 game()
