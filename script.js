@@ -50,7 +50,7 @@ function determinarQuienGana(decisionPersona, decisionMaquina) {
     //Posibles casos con tijera
     if (decisionPersona === "Tijera" && decisionMaquina === "Papel") {
         return true
-    } else if (decisionPersona === "Tijera" && decisionMaquina === "Pidra") {
+    } else if (decisionPersona === "Tijera" && decisionMaquina === "Piedra") {
         return false
     } else if (decisionPersona === "Tijera" && decisionMaquina === "Tijera") {
         return undefined
@@ -58,7 +58,7 @@ function determinarQuienGana(decisionPersona, decisionMaquina) {
     //Posibles casos con Papel 
     if (decisionPersona === "Papel" && decisionMaquina === "Papel") {
         return undefined
-    } else if (decisionPersona === "Papel" && decisionMaquina === "Pidra") {
+    } else if (decisionPersona === "Papel" && decisionMaquina === "Piedra") {
         return true
     } else if (decisionPersona === "Papel" && decisionMaquina === "Tijera") {
         return false
@@ -68,7 +68,7 @@ function determinarQuienGana(decisionPersona, decisionMaquina) {
 
     if (decisionPersona === "Piedra" && decisionMaquina === "Papel") {
         return false
-    } else if (decisionPersona === "Piedra" && decisionMaquina === "Pidra") {
+    } else if (decisionPersona === "Piedra" && decisionMaquina === "Piedra") {
         return undefined
     } else if (decisionPersona === "Piedra" && decisionMaquina === "Tijera") {
         return true
