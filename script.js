@@ -64,6 +64,7 @@ function onlyOneGame(decision) {
     }
     marcador.textContent = `${puntuacionJugador} - ${puntuacionMaquina}`
     if (puntuacionJugador === 5 || puntuacionMaquina === 5) {
+        informacion.style['color'] = `white`;
         if (puntuacionJugador === 5 && puntuacionMaquina === 5){
             informacion.textContent = `ES UN EMPATE`;
             body.style['background-color'] = '#grey'
@@ -76,7 +77,7 @@ function onlyOneGame(decision) {
         }
     return setTimeout(() => {
         confirm('¿Desea volver a jugar?')? location.reload() : close();
-    }, 1000);
+    }, 500);
     }
 }
 
