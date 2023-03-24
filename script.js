@@ -1,3 +1,31 @@
+const piedraDiv = document.querySelector('#piedra');
+const papelDiv = document.querySelector('#papel');
+const tijeraDiv = document.querySelector('#tijera');
+const parrafoDecisionMaquina = document.querySelector('.decisionmaquina');
+const informacion = document.querySelector('.info')
+const body = document.querySelector('body');
+
+let puntuacionJugador = 0;
+let puntuacionMaquina = 0;
+
+const marcador = document.querySelector('.marcador')
+marcador.textContent = `${puntuacionJugador} - ${puntuacionMaquina}`
+
+
+piedraDiv.addEventListener('click', function() {
+    onlyOneGame('Piedra')
+    ;
+  });
+
+papelDiv.addEventListener('click', function() {
+    onlyOneGame('Papel');
+  });
+
+tijeraDiv.addEventListener('click', function() {
+    onlyOneGame('Tijera');
+  });
+
+
 //Funcion para agarrar un numero Random del 1-3 y determinar la eleccion del computador.
 function getComputerChoice() {
     let x = Math.floor((Math.random() * 3) + 1);
@@ -11,36 +39,45 @@ function getComputerChoice() {
     else {
         return "Piedra"
     }
-}
-
-//Funcion para determinar si la eleccion de la persona es piedra, papel o tijera.  
-function determinarDecision(deicision) {
-    const lowerCase = deicision.toLowerCase();
-    if (lowerCase === "tijera") {
-        return "Tijera"
-    } else if (lowerCase === "piedra") {
-        return "Piedra"
-    } else if (lowerCase === "papel"){
-        return "Papel"
-    } else {
-        return "Invalido"
-    }
-
-}
+}   
 
 
 //Funcion para correr el juego solamente una vez.
-function onlyOneGame() {
-    const decisionPersona = determinarDecision(prompt("Elegir piedra, papel o tijera:"));
+function onlyOneGame(decision) {
+    const decisionPersona = `${decision}`;
     const decisionMaquina = getComputerChoice();
     const resultado = determinarQuienGana(decisionPersona, decisionMaquina);
-
-    if (decisionPersona === "Invalido") {
-        alert("Su respuesta es invalida, intentelo denuevo!")
-        location.reload()
-        return
+    parrafoDecisionMaquina.textContent = `La maquina ha elejido ${decisionMaquina}`
+    if (resultado === true) {
+        informacion.textContent = `¡Felcidades! Has ganado un punto.`;
+        informacion.style['color'] = `green`;
+        puntuacionJugador += 1;
+    } else if (resultado === false) {
+        puntuacionMaquina += 1;
+        informacion.textContent = `¡Oh noooo! La maquina ha ganado un punto.`;
+        informacion.style['color'] = `red`; 
+    } else {
+        puntuacionJugador += 1;
+        puntuacionMaquina += 1;
+        informacion.textContent = `¿Es un empate? Todos ganan punto...`;
+        informacion.style['color'] = `gray`;
     }
-    return resultado
+    marcador.textContent = `${puntuacionJugador} - ${puntuacionMaquina}`
+    if (puntuacionJugador === 5 || puntuacionMaquina === 5) {
+        if (puntuacionJugador === 5 && puntuacionMaquina === 5){
+            informacion.textContent = `ES UN EMPATE`;
+            body.style['background-color'] = '#grey'
+        } else if (puntuacionJugador === 5) {
+            body.style['background-color'] = '#0c8f34'
+            informacion.textContent = `¡¡¡GANASTEEEE!!!`;
+        } else if (puntuacionMaquina === 5) {
+            body.style['background-color'] = '#97080f'
+            informacion.textContent = `¡OHHH NOOOO! HAS PERDIDO.`;
+        }
+    return setTimeout(() => {
+        confirm('¿Desea volver a jugar?')? location.reload() : close();
+    }, 1000);
+    }
 }
 
 
@@ -74,49 +111,3 @@ function determinarQuienGana(decisionPersona, decisionMaquina) {
         return true
     }
 }
-
-//Funcion para realizar el juego completo (5 Rondas)!
-
-function game() {
-    let puntuacionJugador = 0;
-    let puntuacionMaquina = 0;
-
-    for (let i = 1; i <= 5; i++) {
-        let decisionPersona = determinarDecision(prompt("Elegir piedra, papel o tijera:"));
-        let decisionMaquina = getComputerChoice();
-        
-        while (decisionPersona === "Invalido") {
-            alert("Opcion invalida.")
-            decisionPersona = determinarDecision(prompt("Elegir piedra, papel o tijera:"));
-        }
-
-        let resultado = determinarQuienGana(decisionPersona, decisionMaquina);
-
-        if (resultado === true) {
-            alert(`La maquina escogio ${decisionMaquina}`)
-            alert(`¡Usted Gana! ${decisionPersona} le gana a ${decisionMaquina}. (Punto para el Jugador!)`)
-            ++puntuacionJugador
-        } else if (resultado === false) {
-            alert(`La maquina escogio ${decisionMaquina}`)
-            alert(`¡Ohhh nooo! Has perdido, ${decisionPersona} pierde contra ${decisionMaquina}. (Punto para la Maquina!)`)
-            ++puntuacionMaquina
-        } else {
-            alert(`La maquina escogio ${decisionMaquina}`)
-            alert("Es un empate! (Nadie recibe puntos!)")
-        }
-
-    }
-    alert(`La puntuacion final es: ${puntuacionJugador} - ${puntuacionMaquina}`)
-
-    if (puntuacionJugador > puntuacionMaquina) {
-        alert("¡EL JUGADOR GANAAAAA!")
-    } else if (puntuacionJugador < puntuacionMaquina) {
-        alert("Parece que las maquinas son mejores al final de todo.")
-    } else {
-        alert("¿Es un empate?")
-    }
-
-    confirm("Desea jugar nuevamente?") ? location.reload() : alert(":(");
-}
-
-game()

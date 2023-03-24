@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@100;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@100;400&display=swap');
+
+
+body, html {
+    font-family: 'Roboto', cursive;
+    background: black;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 70px;
+    font-family: 'Lobster', cursive;
+    color: rgb(228, 225, 225);
+    border-collapse: collapse;
+    opacity: 0;
+    animation: fadeInUp 3s ease 5s forwards; 
+}
+
+p {
+    color: white;
+    text-align: center;
+    opacity: 0;
+    font-size: 25px;
+    font-family: 'Roboto Mono', monospace;
+    animation: fadeInUp 3s ease 6s forwards; 
+}
+
+h1 {
+    color: white;
+    position: relative;
+    margin-left: auto;
+    font-size: 15px;
+    margin-right: auto;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 200;
+}
+
+h1::before, h1::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+h1::before {
+    background-color: black;
+    animation: typewriter 4s steps(19) 1s forwards;
+}
+
+h1::after {
+    width: 10px;
+    background: white;
+    animation: typewriter 4s steps(19) 1s forwards, 
+        blinking 400ms steps(19) infinite;
+
+}
+
+.maincontent {
+    display: flex;
+    margin: 30px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.option {
+    display: flex;
+    flex-direction: column;
+    color: black;
+    font-weight: 600;
+    font-size: 30px;
+    margin: 50px;
+    background: rgb(205, 205, 205);
+    padding: 50px;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto';
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+    animation: fadeInUp 3s ease 5s forwards; 
+    cursor: pointer;
+}
+
+.option:hover {
+    transform: scale(1.1);
+    border-color: white;
+    box-shadow: 0 0 1rem white;
+}
+
+.playing {
+    transform: scale(1.1);
+    border-color: #ffc600;
+    box-shadow: 0 0 1rem #ffc600;
+}
+
+span {
+    fill: black;
+}
+
+@keyframes typewriter {
+    to {left: 100%}
+}
+
+@keyframes blinking {
+    to {
+        background: transparent;
+    }
+}
+
+@keyframes fadeInUp {
+    to {opacity: 1;}
+}
